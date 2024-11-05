@@ -1,3 +1,3 @@
-func (m *default{{.upperStartCamelObject}}Model) tableName() string {
+func (m *default{{.upperStartCamelObject}}Model[T]) tableName() string {
 	return m.table
 }

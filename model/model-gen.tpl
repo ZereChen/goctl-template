@@ -4,7 +4,6 @@
 
 package {{.pkg}}
 {{.imports}}
-{{.vars}}
 {{.types}}
 {{.new}}
 {{.delete}}

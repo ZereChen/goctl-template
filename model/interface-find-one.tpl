@@ -1,1 +1,7 @@
-FindOne(ctx context.Context, {{.lowerStartCamelPrimaryKey}} {{.dataType}}) (*{{.upperStartCamelObject}}, error)
+FindOne(ctx context.Context, {{.lowerStartCamelPrimaryKey}} {{.dataType}}) (*T, error)
+FindList(ctx context.Context, builder squirrel.SelectBuilder, limit int64, offset int64, orderBy []string, pred interface{}, args ...interface{}) ([]*T, error)
+FindListCustom(ctx context.Context, builder squirrel.SelectBuilder) ([]*T, error)
+FindPageList(ctx context.Context, builder squirrel.SelectBuilder, page int64, pageSize int64, orderBy []string, pred interface{}, args ...interface{}) ([]*T, error)
+FindPageListWithTotal(ctx context.Context, builder squirrel.SelectBuilder, page int64, pageSize int64, orderBy []string, pred interface{}, args ...interface{}) ([]*T, int64, error)
+FindCount(ctx context.Context, builder squirrel.SelectBuilder, orderBy []string, pred interface{}, args ...interface{}) (int64, error)
+FindSum(ctx context.Context, builder squirrel.SelectBuilder, orderBy []string, pred interface{}, args ...interface{}) (float64, error)
