@@ -15,7 +15,6 @@ type (
 	// and implement the added methods in custom{{.upperStartCamelObject}}Model.
 	{{.upperStartCamelObject}}Model[T any] interface {
 		{{.lowerStartCamelObject}}Model[T]
-		{{if not .withCache}}withSession(session sqlx.Session) {{.upperStartCamelObject}}Model[T]{{end}}
 	}
 
 	custom{{.upperStartCamelObject}}Model[T any] struct {
@@ -24,15 +23,17 @@ type (
 )
 
 // New{{.upperStartCamelObject}}Model returns a model for the database table.
-func New{{.upperStartCamelObject}}Model[T any](conn sqlx.SqlConn{{if .withCache}}, c cache.CacheConf, opts ...cache.Option{{end}}) {{.upperStartCamelObject}}Model[T] {
-	return &custom{{.upperStartCamelObject}}Model[T]{
+func New{{.upperStartCamelObject}}Model[T any](conn sqlx.SqlConn{{if .withCache}}, c cache.CacheConf, opts ...cache.Option{{end}}, data T) {{.upperStartCamelObject}}Model[T] {
+	customModel := &custom{{.upperStartCamelObject}}Model[T]{
 		default{{.upperStartCamelObject}}Model: new{{.upperStartCamelObject}}Model[T](conn{{if .withCache}}, c, opts...{{end}}),
 	}
+	customModel.Init(data)
+	return customModel
 }
 
 {{if not .withCache}}
-func (m *custom{{.upperStartCamelObject}}Model[T]) withSession(session sqlx.Session) {{.upperStartCamelObject}}Model[T] {
-    return New{{.upperStartCamelObject}}Model[T](sqlx.NewSqlConnFromSession(session))
+func New{{.upperStartCamelObject}}ModeWithSession[T any](session sqlx.Session, data T) {{.upperStartCamelObject}}Model[T] {
+    return New{{.upperStartCamelObject}}Model[T](sqlx.NewSqlConnFromSession(session), data)
 }
 {{end}}
 
