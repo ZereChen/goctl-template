@@ -1,8 +1,8 @@
 func (m *default{{.upperStartCamelObject}}Model[T]) Init(data T) {
 	m.userFieldNames = builder.RawFieldNames(data)
 	m.userRows = strings.Join(m.userFieldNames, ",")
-	m.userRowsExpectAutoSet = strings.Join(stringx.Remove(m.userFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
-	m.userRowsWithPlaceHolder = strings.Join(stringx.Remove(m.userFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
+	m.userRowsExpectAutoSet = strings.Join(stringx.Remove(m.userFieldNames, "`id`", "`create_at`", "`update_at`"), ",")
+	m.userRowsWithPlaceHolder = strings.Join(stringx.Remove(m.userFieldNames, "`id`", "`create_at`", "`update_at`"), "=?,") + "=?"
 }
 
 func (m *default{{.upperStartCamelObject}}Model[T]) Trans(ctx context.Context, fn func(context context.Context, session sqlx.Session) error) error {
@@ -35,6 +35,8 @@ func (m *default{{.upperStartCamelObject}}Model[T]) SelectBuilder(opType string,
 }
 
 func (m *default{{.upperStartCamelObject}}Model[T]) Insert(ctx context.Context, session sqlx.Session, data *{{.upperStartCamelObject}}) (sql.Result,error) {
+    data.DeleteAt = time.Unix(0, 0)
+	data.State = globalkey.DelStateNo
 	{{if .withCache}}{{.keys}}
     ret, err := m.ExecCtx(ctx, func(ctx context.Context, conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("insert into %s (%s) values ({{.expression}})", m.table, m.{{.lowerStartCamelObject}}RowsExpectAutoSet)
