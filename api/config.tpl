@@ -14,7 +14,7 @@ type Config struct {
     }
     Rpc struct {
         // todo 这里添加RPC的配置
-        ThinkDemoRpcClientConf zrpc.RpcClientConf
+        DemoRpcClientConf zrpc.RpcClientConf
     }
 	{{.auth}}
 	{{.jwtTrans}}

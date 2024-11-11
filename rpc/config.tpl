@@ -7,4 +7,8 @@ type Config struct {
 	Mysql struct {
         DataSource string
     }
+    Rpc struct {
+        // todo 这里添加RPC的配置
+        // DemoRpcClientConf zrpc.RpcClientConf
+    }
 }

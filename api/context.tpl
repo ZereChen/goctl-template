@@ -7,7 +7,7 @@ import (
     "github.com/zeromicro/go-zero/core/stores/sqlx"
     "github.com/zeromicro/go-zero/core/stores/redis"
     "github.com/zeromicro/go-zero/zrpc"
-    "x-think-backend/app/demo/cmd/rpc/client/thinkdemorpc"
+    "x-think-backend/app/demo/cmd/rpc/client/demorpc"
 )
 
 
@@ -16,7 +16,7 @@ type ServiceContext struct {
 	RedisClient *redis.Redis
 	{{.middleware}}
     // todo 这里添加rpc的依赖
-    ThinkDemoRpcClient thinkdemorpc.ThinkDemoRpc
+    DemoRpcClient demorpc.DemoRpc
 
 	// todo 这里添加dao层orm的依赖
     // UserModel model.UserModel[model.User]
@@ -33,7 +33,7 @@ func NewServiceContext(c {{.config}}) *ServiceContext {
 		RedisClient: redis.MustNewRedis(c.Redis),
 		{{.middlewareAssignment}}
         // todo 这里添加RPC的依赖
-        ThinkDemoRpcClient: thinkdemorpc.NewThinkDemoRpc(zrpc.MustNewClient(c.Rpc.ThinkDemoRpcClientConf)),
+        DemoRpcClient: demorpc.NewDemoRpc(zrpc.MustNewClient(c.Rpc.DemoRpcClientConf)),
 
 		// todo 这里初始化dao层orm的依赖
         // UserModel: model.NewUserModel[model.User](sqlConn, model.User{}),

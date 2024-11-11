@@ -9,6 +9,9 @@ import (
 type ServiceContext struct {
 	Config config.Config
     RedisClient *redis.Redis
+    // todo 这里添加rpc的依赖
+    // DemoRpcClient demorpc.DemoRpc
+
 	// todo 这里添加dao层orm的依赖
     // UserModel model.UserModel[model.User]
 
@@ -25,6 +28,9 @@ func NewServiceContext(c config.Config) *ServiceContext {
             r.Type = c.Redis.Type
             r.Pass = c.Redis.Pass
         }),
+        // todo 这里添加RPC的依赖
+        // DemoRpcClient: demorpc.NewDemoRpc(zrpc.MustNewClient(c.Rpc.DemoRpcClientConf)),
+
         // todo 这里初始化dao层orm的依赖
         // UserModel: model.NewUserModel[model.User](sqlConn, model.User{}),
 
