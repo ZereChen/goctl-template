@@ -16,7 +16,7 @@ type ServiceContext struct {
 	RedisClient *redis.Redis
 	{{.middleware}}
     // todo 这里添加rpc的依赖
-    thinkdemorpc.ThinkDemoRpc
+    ThinkDemoRpcClient thinkdemorpc.ThinkDemoRpc
 
 	// todo 这里添加dao层orm的依赖
     // UserModel model.UserModel[model.User]
@@ -33,7 +33,7 @@ func NewServiceContext(c {{.config}}) *ServiceContext {
 		RedisClient: redis.MustNewRedis(c.Redis),
 		{{.middlewareAssignment}}
         // todo 这里添加RPC的依赖
-        ThinkDemoRpc: thinkdemorpc.NewThinkDemoRpc(zrpc.MustNewClient(c.Rpc.ThinkDemoRpcClientConf)),
+        ThinkDemoRpcClient: thinkdemorpc.NewThinkDemoRpc(zrpc.MustNewClient(c.Rpc.ThinkDemoRpcClientConf)),
 
 		// todo 这里初始化dao层orm的依赖
         // UserModel: model.NewUserModel[model.User](sqlConn, model.User{}),
