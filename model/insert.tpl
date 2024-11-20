@@ -30,7 +30,7 @@ func (m *default{{.upperStartCamelObject}}Model[T]) SelectBuilder(opType string,
         userfieldNameTmp := builder.RawFieldNames(field)
         return squirrel.Select(userfieldNameTmp...).From(m.table)
     } else {
-        return squirrel.Select(m.userFieldNames...).From(m.table)
+        return squirrel.Select(m.{{.lowerStartCamelObject}}FieldNames...).From(m.table)
     }
 }
 
