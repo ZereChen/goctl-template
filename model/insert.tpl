@@ -1,8 +1,8 @@
 func (m *default{{.upperStartCamelObject}}Model[T]) Init(data T) {
-	m.userFieldNames = builder.RawFieldNames(data)
-	m.userRows = strings.Join(m.userFieldNames, ",")
-	m.userRowsExpectAutoSet = strings.Join(stringx.Remove(m.userFieldNames, "`id`", "`create_at`", "`update_at`"), ",")
-	m.userRowsWithPlaceHolder = strings.Join(stringx.Remove(m.userFieldNames, "`id`", "`create_at`", "`update_at`"), "=?,") + "=?"
+	m.{{.lowerStartCamelObject}}FieldNames = builder.RawFieldNames(data)
+	m.{{.lowerStartCamelObject}}Rows = strings.Join(m.userFieldNames, ",")
+	m.{{.lowerStartCamelObject}}RowsExpectAutoSet = strings.Join(stringx.Remove(m.userFieldNames, "`id`", "`create_at`", "`update_at`"), ",")
+	m.{{.lowerStartCamelObject}}RowsWithPlaceHolder = strings.Join(stringx.Remove(m.userFieldNames, "`id`", "`create_at`", "`update_at`"), "=?,") + "=?"
 }
 
 func (m *default{{.upperStartCamelObject}}Model[T]) Trans(ctx context.Context, fn func(context context.Context, session sqlx.Session) error) error {
