@@ -12,6 +12,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stores/sqlx"
 	"github.com/zeromicro/go-zero/core/stringx"
 	"x-think-backend/common/globalkey"
+	"github.com/google/uuid"
 
 	{{.third}}
 )
