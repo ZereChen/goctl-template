@@ -14,7 +14,7 @@ Redis:
   Key: {{.serviceName}}-api
 
 Mysql:
-  DataSource: root:root@tcp(127.0.0.1:33069)/{{.serviceName}}?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
+  DataSource: root:root@tcp(127.0.0.1:3306)/{{.serviceName}}?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
 
 Rpc:
   # todo 这里添加RPC的配置，本地直连用Endpoints，远程K8s用Target
