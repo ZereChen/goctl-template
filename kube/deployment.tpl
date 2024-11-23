@@ -92,26 +92,3 @@ spec:
         type: Utilization
         averageUtilization: 80
 
----
-
-apiVersion: autoscaling/v2beta2
-kind: HorizontalPodAutoscaler
-metadata:
-  name: {{.Name}}-hpa-m
-  namespace: {{.Namespace}}
-  labels:
-    app: {{.Name}}-hpa-m
-spec:
-  scaleTargetRef:
-    apiVersion: apps/v1
-    kind: Deployment
-    name: {{.Name}}
-  minReplicas: {{.MinReplicas}}
-  maxReplicas: {{.MaxReplicas}}
-  metrics:
-  - type: Resource
-    resource:
-      name: memory
-      target:
-        type: Utilization
-        averageUtilization: 80
