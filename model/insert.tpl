@@ -35,6 +35,7 @@ func (m *default{{.upperStartCamelObject}}Model[T]) SelectBuilder(opType string,
 }
 
 func (m *default{{.upperStartCamelObject}}Model[T]) Insert(ctx context.Context, session sqlx.Session, data *{{.upperStartCamelObject}}) (sql.Result,error) {
+    data.Uuid = uuid.New().String()
     data.DeleteAt = time.Unix(0, 0)
 	data.State = globalkey.DelStateNo
 	{{if .withCache}}{{.keys}}

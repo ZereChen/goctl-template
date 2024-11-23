@@ -11,6 +11,7 @@ import (
 	"github.com/zeromicro/go-zero/core/stringx"
 	"github.com/Masterminds/squirrel"
 	"x-think-backend/common/globalkey"
+	"github.com/google/uuid"
 
 	{{.third}}
 )
