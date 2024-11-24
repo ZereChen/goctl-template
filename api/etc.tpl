@@ -11,6 +11,7 @@ Redis:
   Host: redis-svc.{namespace}-base:6379
   Type: node
   Pass: redispassword
+  Key: {{.serviceName}}
 
 Mysql:
   DataSource: root:root@tcp(mysql-svc.{namespace}-base:3306)/{{.serviceName}}?charset=utf8mb4&parseTime=true&loc=Asia%2FShanghai
