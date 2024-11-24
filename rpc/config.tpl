@@ -1,9 +1,13 @@
 package config
 
-import "github.com/zeromicro/go-zero/zrpc"
+import (
+    "github.com/zeromicro/go-zero/zrpc"
+    "github.com/zeromicro/go-zero/core/stores/redis"
+)
 
 type Config struct {
 	zrpc.RpcServerConf
+	Redis redis.RedisConf
 	Mysql struct {
         DataSource string
     }
